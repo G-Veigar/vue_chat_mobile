@@ -146,7 +146,10 @@ io.on('connection',function(socket){
 		var timeStr = messTime.getHours() + ':' + messTime.getMinutes();
 		data.time = timeStr;
 		console.log(('a private_mess: '+data.mess+" from " + data.id + " to " + data.to + "at" + data.time).cyan);
+		// 接受者收到消息
 		bind_users[data.to].emit('private_mess',data);
+		// 发送者收到消息
+		bind_users[data.id].emit('private_mess',data);
 	});
 	socket.on('disconnect',function(){
 		console.log(('user: ' + socket.$uid + '退出了').yellow);

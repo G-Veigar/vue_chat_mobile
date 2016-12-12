@@ -8,6 +8,7 @@
 <script>
 import appBar from '../components/appbar.vue'
 import userList from '../components/userList.vue'
+import userInfo from '../components/userInfo.vue'
 import { Toast } from 'mint-ui'
 
 export default {
@@ -15,7 +16,7 @@ export default {
     mounted() {
     },
     components: {
-        appBar,userList
+        appBar, userList, userInfo
     }
 }
 </script>

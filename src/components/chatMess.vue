@@ -1,5 +1,5 @@
 <template>
-    <div class="mess clearfix" :class="{self: mess.self}">
+    <div class="mess clearfix" :class="{self: mess.id == userId}">
         <div class="mess-logo">22</div>
         <div class="mess-box">
             {{ mess.mess }}
@@ -9,11 +9,18 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
     name: 'chatMess',
     data () {
         return {
         }
+    },
+    computed: {
+        ...mapState([
+            'userId'
+        ])
     },
     methods: {
 

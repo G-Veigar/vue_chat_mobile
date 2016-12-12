@@ -2,13 +2,13 @@
     <div>
         <mu-appbar title="VChat">
             <mu-icon-button icon='menu' slot="left" @click="toggle(true)"/>
-            <mu-icon-button icon='expand_more' slot="right"/>
+            <mu-icon-button icon='perm_identity' slot="right" @click="setUserInfo(true)"/>
         </mu-appbar>
         <div class="view-router-bar">
             <div class="view-router-box clearfix"> 
                 <div class="view-router friends" :class="{active: thisRouter =='index'}" @click="goto('index')">Friends</div>
                 <div class="view-router user-chat" :class="{active: thisRouter =='chat'}" @click="goto('chat')">
-                    {{chatWith.name}}<span class="iphone-show"><mu-icon id="iphone-logo" value="phone_iphone" :size="20" color="#343C4A"/></span>
+                    {{chatWithObj.name}}</span>
                 </div>
                 <div class="view-router group" :class="{active: thisRouter =='group'}" @click="goto('group')">Group</div>
             </div>
@@ -27,7 +27,9 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from 'vuex'
+import { mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
     name: 'appBar',
@@ -41,11 +43,17 @@ export default {
         ...mapState([
             'chatWith'
         ]),
+        ...mapGetters([
+            'chatWithObj'
+        ]),
         thisRouter: function(){
             return this.$router.currentRoute.name
         }
     },
     methods: {
+        ...mapMutations([
+            'setUserInfo'
+        ]),
         toggle (flag) {
             this.open = !this.open
             this.docked = !flag

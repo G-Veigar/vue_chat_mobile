@@ -15,11 +15,8 @@ const store = new Vuex.Store({
         chatWith: '',
         // 保存所有消息
         messages: {},
-        mes: {
-            m: {
-                adminMes: []
-            }
-        }
+        // 用户信息展示控制
+        userInfo: false
     },
     getters: {
         chatWithObj: (state) => {
@@ -49,15 +46,27 @@ const store = new Vuex.Store({
             state.chatWith = value
         },
         setMessages (state, mess) {
-            if (state.messages[mess.id]) {
-                state.messages[mess.id].mess = state.messages[mess.id].mess.concat(mess)
-                state.mes.m.adminMes.push(mess)
-                console.info(state.messages[mess.id])
+            // 如果是自己发送的消息
+            if (mess.id == state.userId) {
+                if (state.messages[mess.to]) {
+                    state.messages[mess.to].mess.push(mess)
+                } else {
+                    Vue.set(state.messages, mess.to, {
+                        mess: [mess]
+                    })
+                }  
             } else {
-                state.messages[mess.id] = {
-                    mess: [mess]
+                if (state.messages[mess.id]) {
+                    state.messages[mess.id].mess.push(mess)
+                } else {
+                    Vue.set(state.messages, mess.id, {
+                        mess: [mess]
+                    })
                 }
             }
+        },
+        setUserInfo (state, val) {
+            state.userInfo = val
         }
     }
     // strict: process.env.NODE_ENV !== 'production'

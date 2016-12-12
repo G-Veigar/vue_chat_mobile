@@ -2,7 +2,7 @@
     <mu-list>
         <div v-for="item in online_users">
             <mu-list-item :title="item.name" @click="goToChat(item.id)">
-                <mu-avatar src="" slot="leftAvatar"/>
+                <mu-avatar src="" slot="leftAvatar" />
                 <!--<mu-icon value="chat_bubble" slot="right"/>-->
                 <mu-badge content="12" slot="after"/>
             </mu-list-item>
@@ -33,6 +33,7 @@ export default {
         ]),
         goToChat: function(id){
             this.setChatWith(id)
+            this.$nextTick
             this.$router.push({
                 name: 'chat'
             })

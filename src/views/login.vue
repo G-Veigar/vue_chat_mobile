@@ -31,7 +31,7 @@ export default {
         ]),
         login: function(){
             var setUserId = this.setUserId
-            this.$http.post('http://localhost:3132/login',{
+            this.$http.post('http://172.17.23.2:3132/login',{
                 name: this.username,
                 pass: this.password
             }).then((res)=>{
@@ -48,7 +48,7 @@ export default {
                     this.socket.on('online_users', this.setOnlineUsers)
                     this.socket.on('private_mess', this.setMessages)
                     // 获取用户列表
-                    this.$http.get('http://localhost:3132/getOnlineUsers').then((res) => {
+                    this.$http.get('http://172.17.23.2:3132/getOnlineUsers').then((res) => {
                         if(res.data.code==1){
                             this.setOnlineUsers(res.data.online_users)
                         } else {
