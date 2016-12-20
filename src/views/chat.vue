@@ -17,8 +17,7 @@ import appBar from '../components/appbar.vue'
 import chatMess from '../components/chatMess.vue'
 import chatBottom from '../components/chatBottom.vue'
 import userInfo from '../components/userInfo.vue'
-import { mapState } from 'vuex';
-import { mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex'
 
 export default {
     name: 'chat',
@@ -40,11 +39,12 @@ export default {
     },
     methods: {
         scrollBottom() {
-            this.chatBox.scrollTop = this.chatBox.scrollHeight;
+            this.chatBox.scrollTop = this.chatBox.scrollHeight
         }
     },
     mounted() {
-        this.chatBox = document.getElementById('chat-box');
+        this.chatBox = document.getElementById('chat-box')
+        this.scrollBottom()
     },
     updated() {
         this.scrollBottom()

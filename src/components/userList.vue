@@ -2,9 +2,9 @@
     <mu-list>
         <div v-for="item in online_users">
             <mu-list-item :title="item.name" @click="goToChat(item.id)">
-                <mu-avatar src="" slot="leftAvatar" />
+                <mu-avatar :src="'http://172.17.23.2:3132/logo/' + item.logo" slot="leftAvatar" />
                 <!--<mu-icon value="chat_bubble" slot="right"/>-->
-                <mu-badge content="12" slot="after"/>
+                <mu-badge v-show="getNotRead(item.id) != '0'" :content="getNotRead(item.id)" slot="after" secondary/>
             </mu-list-item>
             <mu-divider/>
         </div>
@@ -24,19 +24,25 @@ export default {
     },
     computed: {
         ...mapState([
-            'userId', 'online_users'
+            'userId', 'online_users', 'messages'
         ]),
     },
     methods: {
         ...mapMutations([
-            'setChatWith'
+            'setChatWith', 'resetNotReady'
         ]),
         goToChat: function(id){
             this.setChatWith(id)
+            this.resetNotReady(id)
             this.$nextTick
             this.$router.push({
                 name: 'chat'
             })
+        },
+        getNotRead(id) {
+            var res =  this.messages[id] ? this.messages[id].notRead : 0
+            res = res > 99 ? '99+' : res
+            return res + ''
         }
     },
     mounted() {

@@ -1,6 +1,8 @@
 <template>
     <div class="mess clearfix" :class="{self: mess.id == userId}">
-        <div class="mess-logo">22</div>
+        <!--<div class="mess-logo"></div>-->
+        <mu-avatar v-if="mess.id == userId" class="mess-logo" :src="'http://172.17.23.2:3132/logo/' + userLogo" slot="leftAvatar" />
+        <mu-avatar v-if="mess.id != userId" class="mess-logo" :src="'http://172.17.23.2:3132/logo/' + chatWithLogo" slot="leftAvatar" />
         <div class="mess-box">
             {{ mess.mess }}
             <div class="mess-time"><mu-icon value="access_time" :size="12" class="time-logo"/>{{ mess.time }}</div>
@@ -19,8 +21,14 @@ export default {
     },
     computed: {
         ...mapState([
-            'userId'
-        ])
+            'userId', 'chatWith', 'online_users'
+        ]),
+        chatWithLogo() {
+            return this.online_users[this.chatWith].logo
+        },
+        userLogo() {
+            return this.online_users[this.userId].logo
+        }
     },
     methods: {
 
@@ -63,9 +71,6 @@ export default {
     position: absolute;
     width: 50px;
     height: 50px;
-    border-radius: 3px; 
-    background-color: #fff;
-    position: absolute;
 }
 .mess-time {
     background-color: #282F3B;

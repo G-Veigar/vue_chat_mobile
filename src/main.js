@@ -2,7 +2,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'
-import VueResource from 'vue-resource';
+import VueResource from 'vue-resource'
+import { sync } from 'vuex-router-sync'
 import App from './App'
 import routes from './routers'
 import store from './vuex/store'
@@ -24,6 +25,9 @@ FastClick.attach(document.body)
 const router = new VueRouter({
     routes
 })
+
+// 将路由信息绑定到state
+sync(store, router)
 
 // 访问控制
 router.beforeEach((to, from, next) => {

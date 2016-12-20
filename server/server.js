@@ -4,7 +4,7 @@ var socket = require('socket.io');
 var mysql = require('mysql');
 var mysql_conf = require('../config/mysql_conf.js');
 var multer = require('multer'); 
-var colors = require('colors');//终端着色插件
+var colors = require('colors'); //终端着色插件
 //bold italic underline inverse yellow cyan white magenta green red grey blue rainbow zebra random
 var online_users = {};
 var bind_users = {};
@@ -114,14 +114,7 @@ app.use(express.static('node_modules',{
 
 }));
 //处理用户头像图片请求
-app.use('/logo',express.static('./static/img/user_logo',{
-
-}));
-//处理常规图片请求
-app.use('/img',express.static('./static/img',{
-
-}));
-
+app.use('/logo', express.static('./src/assets/logo'));
 
 var server = app.listen(3132,function(){
 	console.log('chat app server run at 3132'.green);
