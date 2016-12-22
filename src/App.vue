@@ -1,19 +1,22 @@
 <template>
   <div id="app">
-		<audio id="chat-audio" src="http://data3.huiyi8.com/2015/saraxuss/3/11/4.mp3">{{ handleAudio }}</audio>
+	<audio id="chat-audio" src="http://data3.huiyi8.com/2015/saraxuss/3/11/4.mp3">{{ handleAudio }}</audio>
     <router-view></router-view>
+    <welcome-app :show="welShow"></welcome-app>
   </div>
 </template>
 
 <script>
 import parser from 'ua-parser-js'
 import { mapState, mapMutations } from 'vuex'
+import welcomeApp from './components/welcomeApp.vue'
 
 export default {
 	name: 'app',
 	data() {
 		return {
-			chatAudio: {}
+			chatAudio: {},
+			welShow: true
 		}
 	},
 	computed: {
@@ -37,6 +40,7 @@ export default {
 		}
 	},
 	components: {
+		welcomeApp
 	},
 	mounted() {
 		this.chatAudio = document.getElementById('chat-audio')
@@ -44,6 +48,10 @@ export default {
 		if(ua.model == 'iPhone'){
 			
 		}
+		var myThis = this
+		setTimeout(function() {
+			myThis.welShow = false
+		}, 3000)
 	}
 }
 </script>

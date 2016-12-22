@@ -2,7 +2,7 @@
     <div class="chat-bottom">
         <mu-icon-button icon="add" class="chat-add" :touch="true"/>
         <div class="chat-input-box">
-            <input type="text" class="chat-input" v-model.trim.lazy="inputMess" >
+            <input type="text" class="chat-input" v-model.trim.lazy="inputMess" @keyup.enter="sendMess">
         </div>
         <div id="chat-send">
             <mu-raised-button icon="send"  backgroundColor="#7ACCC8" color="#FFF" @click="sendMess"/>

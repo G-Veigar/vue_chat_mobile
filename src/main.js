@@ -32,7 +32,7 @@ sync(store, router)
 // 访问控制
 router.beforeEach((to, from, next) => {
     // 未登录
-    if (!sessionStorage.getItem('logined') && to.name != 'login') {
+    if (!sessionStorage.getItem('logined') && to.name != 'login' && to.name != 'test') {
         MessageBox({
             title: '提示',
             message: '登录超时，请重新登录'

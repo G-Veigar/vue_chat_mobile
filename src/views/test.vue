@@ -2,6 +2,7 @@
     <div>
         <h1>{{value}}</h1>
         <input type="text" v-model="value">
+        <welcome-app :show="true"></welcome-app>
     </div>
 </template>
 
@@ -9,6 +10,7 @@
 import { MessageBox } from 'mint-ui'
 import { mapGetters } from 'vuex'
 import { mapMutations } from 'vuex'
+import  welcomeApp  from '../components/welcomeApp.vue'
 
 export default {
     name: 'login',
@@ -24,7 +26,9 @@ export default {
     mounted() {
     },
     updated(){
-
+    },
+    components: {
+        welcomeApp
     }
 }
 </script>
